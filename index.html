@@ -1,11 +1,112 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+  <link rel="shortcut icon" href="/img/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="HILAB" />
+  <link rel="manifest" href="/img/site.webmanifest" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
     <title>My Site</title>
   </head>
-  <body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
-    <p>Coming more soon</p>
+  <body style="font-family: sans-serif; text-align: center; margin-top: 10px;">
+     <a href="https://skjuts.com" class="logo-container">
+    <img src="C:\06_HILAB\GITHUB\SKJUTS\Skjuts\img\nice.jpg"  alt="SKJUTS Logo" class="logo-img">
+   </a>
+<section id="about-section">
+     <div style="height: 30vh;"></div>
 
-    <img src="image.jpg" alt="My image" style="max-width: 300px; margin-top: 20px;">
-  </body>
+  <div class="team-profile-fade-group">
+  <div class="team-profile-container">
+    <!-- Card 1 -->
+    <div class="profile-card" id="card1">
+      <div class="card-inner">
+        <!-- FRONT -->
+        <div class="card-front">
+          <img src="img\eric.jpg" alt="David" class="profile-image">
+          <div class="profile-info">
+            <h3>Eric C. Torsede</h3>
+            <p>Doing all the dirty work, also some tech</p>
+            <div class="arrow right" onclick="flipCard(1)">&#8594;</div>
+          </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-back">
+          <div class="back-info">
+            <p>
+             FILL IN
+            <p>
+             FILL IN
+            </p>
+            <p>Email: david@hilabengineering.se</p>
+            <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+        <div class="profile-card" id="card2">
+      <div class="card-inner">
+        <!-- FRONT -->
+        <div class="card-front">
+          <img src="img\isabelle.jpg" alt="Isabelle" class="profile-image">
+          <div class="profile-info">
+            <h3>Isabelle Avenius</h3>
+            <p>Selling sand in the desert</p>
+            <div class="arrow right" onclick="flipCard(2)">&#8594;</div>
+          </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-back">
+          <div class="back-info">
+            <p>
+             FILL IN
+              </p>
+              <p>
+              FILL IN
+            </p>
+            <p>Email:  eric@hilabengineering.se</p>
+
+            <div class="arrow right left-align" onclick="flipCard(2)">&#8592;</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+          <!-- Card 3 -->
+    <div class="profile-card" id="card1">
+      <div class="card-inner">
+        <!-- FRONT -->
+        <div class="card-front">
+          <img src="img\johanna.jpg" alt="David" class="profile-image">
+          <div class="profile-info">
+            <h3>Johanna C. Nylander</h3>
+            <p>Creative creature handling the business and other mental things</p>
+            <div class="arrow right" onclick="flipCard(1)">&#8594;</div>
+          </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-back">
+          <div class="back-info">
+            <p>
+              FILL IN
+            </p>
+            <p>
+             FILL IN
+            </p>
+            <p>Email: david@hilabengineering.se</p>
+            <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
+  </div>
+  </div>
+</section>
+</body>
+
+
+
 </html>
