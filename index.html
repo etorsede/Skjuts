@@ -11,15 +11,16 @@
   <link rel="stylesheet" href="css/style.css">
     <title>Skjuts - Home</title>
   </head>
-  <body style="font-family: sans-serif; text-align: center; margin-top: 10px;">
+  <body class="custom-background" style="font-family: sans-serif; text-align: center; margin-top: 10px;">
      <a href="https://skjuts.com" class="logo-container">
-    <img src="img\nice.jpg"  alt="SKJUTS Logo" class="logo-img">
+    <img src="img\nice_no_background.png"  alt="SKJUTS Logo" class="logo-img">
    </a>
 <section id="about-section">
-     <div style="height: 35vh;"></div>
+     <div style="height: 25vh;"></div>
 
   <div class="team-profile-fade-group">
   <div class="team-profile-container">
+
     <!-- Card 1 -->
     <div class="profile-card" id="card1">
       <div class="card-inner">
@@ -105,6 +106,96 @@
   </div>
   </div>
 </section>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);
+
+renderer.domElement.style.position = "fixed";
+renderer.domElement.style.top = "0";
+renderer.domElement.style.left = "0";
+renderer.domElement.style.zIndex = "0";
+
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(5, 10, 7);
+scene.add(light);
+
+const ambient = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambient);
+
+// Loader
+const loader = new GLTFLoader();
+
+let car;
+
+loader.load(
+  'models/skjuts_car.glb',
+  (gltf) => {
+    console.log("Car loaded ✅");
+
+    car = gltf.scene;
+
+    car.scale.set(2, 2, 2);
+    car.position.set(0, 0, 0);
+
+    scene.add(car);
+  },
+  undefined,
+  (error) => {
+    console.error("Load error ❌", error);
+  }
+);
+
+// Path
+const curve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(-7, 0, -7),
+  new THREE.Vector3(7, 0, -7),
+  new THREE.Vector3(7, 0, 7),
+  new THREE.Vector3(-7, 0, 7)
+], true);
+
+let t = 0;
+
+camera.position.set(0, 10, 15);
+camera.lookAt(0, 0, 0);
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (car) {
+    t += 0.001;
+    if (t > 1) t = 0;
+
+    const position = curve.getPointAt(t);
+    const tangent = curve.getTangentAt(t);
+
+    car.position.copy(position);
+
+    const angle = Math.atan2(tangent.x, tangent.z);
+    car.rotation.y = angle;
+  }
+
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+
 </body>
 
 
