@@ -42,7 +42,7 @@
             <p>
              FILL IN
             </p>
-            <p>Email: david@hilabengineering.se</p>
+            <p>Email:</p>
             <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
           </div>
         </div>
@@ -71,7 +71,7 @@
               <p>
               FILL IN
             </p>
-            <p>Email:  eric@hilabengineering.se</p>
+            <p>Email:</p>
 
             <div class="arrow right left-align" onclick="flipCard(2)">&#8592;</div>
 
@@ -101,14 +101,21 @@
             <p>
              FILL IN
             </p>
-            <p>Email: david@hilabengineering.se</p>
+            Email:
             <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
   </div>
   </div>
 </section>
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://threejs.org/build/three.module.js",
+        "three/addons/": "https://threejs.org/examples/jsm/"
+    }
+}</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+import*as THREE from 'three'
+import { GLTFLoader } from 'https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 
@@ -122,78 +129,89 @@ const camera = new THREE.PerspectiveCamera(
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x000000, 0);
-
-renderer.domElement.style.position = "fixed";
-renderer.domElement.style.top = "0";
-renderer.domElement.style.left = "0";
-renderer.domElement.style.zIndex = "0";
-
 document.body.appendChild(renderer.domElement);
 
-// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 1));
+
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 10, 7);
 scene.add(light);
 
-const ambient = new THREE.AmbientLight(0xffffff, 1);
-scene.add(ambient);
-
-// Loader
 const loader = new GLTFLoader();
 
 let car;
+let baseRotation;
 
-loader.load(
-  'models/skjuts_car.glb',
-  (gltf) => {
-    console.log("Car loaded ✅");
+loader.load("./models/skjuts_car.glb", (gltf) => {
+  car = gltf.scene;
 
-    car = gltf.scene;
+  car.scale.set(2, 2, 2);
 
-    car.scale.set(2, 2, 2);
-    car.position.set(0, 0, 0);
+  car.rotation.x = Math.PI*1.5 ;
 
-    scene.add(car);
-  },
-  undefined,
-  (error) => {
-    console.error("Load error ❌", error);
-  }
-);
+  baseRotation = car.rotation.clone();
 
-// Path
-const curve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(-7, 0, -7),
-  new THREE.Vector3(7, 0, -7),
-  new THREE.Vector3(7, 0, 7),
-  new THREE.Vector3(-7, 0, 7)
-], true);
+  scene.add(car);
+});
+
+const centerY = 25;
+const radiusX = 12;
+const radiusZ = 17;
+
+const curve = new THREE.Curve();
+
+curve.getPoint = function (t) {
+  const angle = t * Math.PI * 2;
+
+  return new THREE.Vector3(
+    Math.cos(angle) * radiusX,
+    centerY,
+    Math.sin(angle) * radiusZ
+  );
+};
+
 
 let t = 0;
 
-camera.position.set(0, 10, 15);
-camera.lookAt(0, 0, 0);
+camera.position.set(0, 30, 30);
+camera.lookAt(0, 10, 0);
+
+renderer.domElement.style.transform = "translateY(-80%)";
 
 function animate() {
   requestAnimationFrame(animate);
 
   if (car) {
-    t += 0.001;
-    if (t > 1) t = 0;
+  t += 0.001;
+  if (t > 1) t = 0;
 
-    const position = curve.getPointAt(t);
-    const tangent = curve.getTangentAt(t);
+  const pos = curve.getPointAt(t);
+  const tan = curve.getTangentAt(t);
 
-    car.position.copy(position);
+  car.position.copy(pos);
 
-    const angle = Math.atan2(tangent.x, tangent.z);
-    car.rotation.y = angle;
+  const angle = Math.atan2(tan.x, tan.z);
+
+  car.rotation.set(
+    baseRotation.x,
+    baseRotation.y,
+    angle + Math.PI / 2
+  );
+
+
   }
 
   renderer.render(scene, camera);
 }
 
 animate();
+</script>
+
+<script>
+function flipCard(cardId) {
+  const card = document.getElementById(`card${cardId}`);
+  card.classList.toggle("flipped");
+}
 </script>
 
 </body>
