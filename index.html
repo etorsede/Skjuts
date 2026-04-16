@@ -22,89 +22,87 @@
   <div class="team-profile-container">
 
     <!-- Card 1 -->
-    <div class="profile-card" id="card1">
-      <div class="card-inner">
-        <!-- FRONT -->
-        <div class="card-front">
-          <img src="img\eric.jpg" alt="David" class="profile-image">
-          <div class="profile-info">
-            <h3>Eric C. Torsede</h3>
-            <p>Doing all the dirty work, also some tech</p>
-            <div class="arrow right" onclick="flipCard(1)">&#8594;</div>
-          </div>
-        </div>
+<div class="profile-card" onclick="flipCard(this)">
+  <div class="card-wrapper">
+  <div class="card-inner">
 
-        <!-- BACK -->
-        <div class="card-back">
-          <div class="back-info">
-            <p>
-             FILL IN
-            <p>
-             FILL IN
-            </p>
-            <p>Email:</p>
-            <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
-          </div>
-        </div>
+    <!-- FRONT -->
+    <div class="card-front">
+      <img src="img/eric.jpg" alt="Eric" class="profile-image">
+
+      <div class="profile-info">
+        <h3>Eric C. Torsede</h3>
+        <p>Doing all the dirty work, also some tech</p>
       </div>
     </div>
+
+    <!-- BACK -->
+    <div class="card-back">
+      <div class="back-info">
+        <p>FILL IN</p>
+        <p>FILL IN</p>
+        <p>Email:</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
 
     <!-- Card 2 -->
-        <div class="profile-card" id="card2">
-      <div class="card-inner">
-        <!-- FRONT -->
-        <div class="card-front">
-          <img src="img\isabelle.jpg" alt="Isabelle" class="profile-image">
-          <div class="profile-info">
-            <h3>Isabelle Avenius</h3>
-            <p>Selling sand in the desert</p>
-            <div class="arrow right" onclick="flipCard(2)">&#8594;</div>
-          </div>
-        </div>
+        <div class="profile-card" onclick="flipCard(this)">
+          <div class="card-wrapper">
+  <div class="card-inner">
 
-        <!-- BACK -->
-        <div class="card-back">
-          <div class="back-info">
-            <p>
-             FILL IN
-              </p>
-              <p>
-              FILL IN
-            </p>
-            <p>Email:</p>
+    <!-- FRONT -->
+    <div class="card-front">
+      <img src="img/isabelle.jpg" alt="Eric" class="profile-image">
 
-            <div class="arrow right left-align" onclick="flipCard(2)">&#8592;</div>
-
-          </div>
-        </div>
+      <div class="profile-info">
+        <h3>Isabelle Avenius</h3>
+        <p>Selling sand in the desert</p>
       </div>
     </div>
-          <!-- Card 3 -->
-    <div class="profile-card" id="card1">
-      <div class="card-inner">
-        <!-- FRONT -->
-        <div class="card-front">
-          <img src="img\johanna.jpg" alt="David" class="profile-image">
-          <div class="profile-info">
-            <h3>Johanna C. Nylander</h3>
-            <p>Creative creature handling the business and other mental things</p>
-            <div class="arrow right" onclick="flipCard(1)">&#8594;</div>
-          </div>
-        </div>
 
-        <!-- BACK -->
-        <div class="card-back">
-          <div class="back-info">
-            <p>
-              FILL IN
-            </p>
-            <p>
-             FILL IN
-            </p>
-            Email:
-            <div class="arrow right left-align" onclick="flipCard(1)">&#8592;</div>
+    <!-- BACK -->
+    <div class="card-back">
+      <div class="back-info">
+        <p>FILL IN</p>
+        <p>FILL IN</p>
+        <p>Email:</p>
+      </div>
+    </div>
+
   </div>
+</div>
+</div>
+          <!-- Card 3 -->
+ <div class="profile-card" onclick="flipCard(this)">
+  <div class="card-wrapper">
+  <div class="card-inner">
+
+    <!-- FRONT -->
+    <div class="card-front">
+      <img src="img/johanna.jpg" alt="Eric" class="profile-image">
+
+      <div class="profile-info">
+        <h3>Johanna C. Nylander</h3>
+        <p>Creative creature handling the business and other mental things</p>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="card-back">
+      <div class="back-info">
+        <p>FILL IN</p>
+        <p>FILL IN</p>
+        <p>Email:</p>
+      </div>
+    </div>
+
   </div>
+</div>
+</div>
 </section>
 <script type="importmap">
 {
@@ -208,8 +206,7 @@ animate();
 </script>
 
 <script>
-function flipCard(cardId) {
-  const card = document.getElementById(`card${cardId}`);
+function flipCard(card) {
   card.classList.toggle("flipped");
 }
 </script>

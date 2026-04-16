@@ -8,6 +8,14 @@
      object-fit: contain;
   }
 
+  canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .custom-background {
     background-image: url('../img/chess.png');
     background-size: cover;
@@ -251,45 +259,40 @@ footer {
   padding: 10px 0;
 }
 
+/* CONTAINER */
 .team-profile-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  padding: 10px 24px 20px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
   position: relative;
   z-index: 2;
-  margin-top: 2rem
 }
 
-.top-bar {
-  position: absolute;
-  top: 1rem;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  z-index: 10;
-}
-
+/* CARD */
 .profile-card {
-  width: 700px;
-  height: 350px;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
+.profile-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* INNER FLIP */
 .card-inner {
   width: 100%;
   height: 100%;
   position: relative;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease;
   transform-style: preserve-3d;
 }
 
@@ -297,99 +300,69 @@ footer {
   transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+/* FRONT + BACK */
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 15px;
-  backface-visibility: hidden;
+  border-radius: 16px;
   overflow: hidden;
+  backface-visibility: hidden;
+  background: #7FAF8F;
   display: flex;
-}
-
-.card-front {
-  background: #7FAF8F;
-  flex-direction: row;
-  color: white
-}
-
-.card-back {
-
-  background: #7FAF8F;
-  transform: rotateY(180deg);
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: auto; /* or unset it */
 }
 
-.back-info {
-  overflow-x: auto;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  padding: 10px;
-}
-
-.back-info p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  color: white
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
+/* FRONT */
 .profile-image {
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  height: 80%;
   object-fit: cover;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
 }
 
+/* NAME BOX */
 .profile-info {
-  width: 50%;
-  padding: 30px 20px 20px;
+  height: 10%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-}
-
-.profile-info h3 {
-  margin: 0;
-  font-size: 1.6rem;#E56A6A
+  justify-content: center; /* centers vertically */
+  align-items: flex-start; /* LEFT ALIGN = looks way better */
+  padding: 0.8rem 1rem;
+  background: #7FAF8F;
   color: white;
 }
 
-.profile-info p {
+/* NAME */
+.profile-info h3 {
   margin: 0;
-  font-size: 1.1rem;
-  max-width: 250px;
-  color: white
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
-
-.arrow.right {
-  position: absolute;
-  right: 10px;
-  bottom: 20px;
-  font-size: 2rem;
-  cursor: pointer;
-  background: #E56A6A ;
-  border-radius: 50%;
-  padding: 10px 14px;
-  transition: background 0.2s;
-  z-index: 1;
+/* DESCRIPTION */
+.profile-info p {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  line-height: 1.3;
 }
 
-.arrow.right:hover {
-  background: #ccc;
+/* BACK */
+.card-back {
+  transform: rotateY(180deg);
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
 }
 
+.card-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden; /* 👈 this is key */
+}
 
 #about-section {
   font-weight: 400;
@@ -499,217 +472,8 @@ footer a:hover {
   transform: scale(0.98);
 }
 
-@media (min-width: 360px) and (max-width: 399px) {
-  .team-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0px;
-    padding: 0px 20px 20px;
-    margin-top: 4px;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 0.85rem !important;
-  }
-
-  .profile-card {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    height: auto;
-    padding: 0px 0px 10px;
-    overflow: visible;
-  }
-
-  .card-inner,
-  .card-front,
-  .card-back {
-    height: 310px;
-    flex-direction: row;
-    border: none;
-    margin: 0;
-    font-size: initial;
-
-  }
-
-  .card-inner {
-    min-height: 300px;
-  }
-
-  .profile-image {
-    flex: 0 0 60%;
-    height: auto;
-    max-height: 310px;
-    object-fit: cover;
-    border-radius: 15px 0 0 15px;
-  }
-
-  .profile-info {
-    width: 100%;
-    padding: 5px;
-    align-items: center;
-    text-align: center;
-    border-radius: 0 0 15px 15px;
-    overflow: visible;
-    word-wrap: break-word;
-  }
-
-  .arrow.right {
-    right: 1.5px;
-  bottom: 2.8px;
-  font-size: 1.5rem;
-  padding: 6px 10px;
-  border-radius: 50%;
-  transform: translateY(1px);
-}
- .arrow.right.left-align {
-    transform: translateY(-1px);
-  }
-
-}
-
-@media (min-width: 400px) and (max-width: 719px) {
-  .team-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0px;
-    padding: 0;
-    margin-top: 4px;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 0.85rem;
-  }
-
-  .profile-card {
-    width: 70%;
-    max-width: 900px;
-    margin: 0;
-    height: auto;
-    padding: 0px 0px 10px;
-    overflow: visible;
-  }
-
-  .card-inner,
-  .card-front,
-  .card-back {
-    height: 270px;
-    flex-direction: row;
-    border: none;
-    margin: 0;
-    font-size: 0.1rem !important;
-
-  }
-
-  .card-inner {
-    min-height: 300px;
-  }
-
-  .profile-image {
-    flex: 0 0 55%;
-    height: 200;
-    max-height: 350px;
-    object-fit: cover;
-    border-radius: 15px 0 0 15px;
-  }
-
-    .profile-info {
-    width: 100%;
-    padding: 5px;
-    align-items: center;
-    text-align: center;
-    border-radius: 0 0 15px 15px;
-    overflow: visible;
-    word-wrap: break-word;
-    font-size: 0.65rem;
-  }
-
-  .arrow.right {
-    right: 1.5px;
-  bottom: 2.8px;
-  font-size: 1.5rem;
-  padding: 6px 10px;
-  border-radius: 50%;
-  transform: translateY(1px);
-}
- .arrow.right.left-align {
-    transform: translateY(-1px);
-  }
-.profile-card:nth-child(2) {
-    margin-top: -23px;
-
-}
-}
 
 @media (max-width: 359px) {
-  .team-profile-container {
-    margin-top: -10px;
-    padding-top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0px;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 0.85rem !important;
-  }
-
-  .profile-card {
-    width: 100%;
-    max-width: 900px;
-    margin: 0;
-    height: auto;
-    padding: 0px 0px 10px;
-    overflow: visible;
-  }
-
-  .card-inner,
-  .card-front,
-  .card-back {
-    height: 300px;
-    flex-direction: row;
-    border: none;
-    margin: 0;
-    font-size: initial;
-
-  }
-
-  .card-inner {
-    min-height: 300px;
-  }
-
-  .profile-image {
-    flex: 0 0 55%;
-    height: auto;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 15px 0 0 15px;
-  }
-
-  .profile-info {
-    width: 100%;
-    padding: 5px;
-    align-items: center;
-    text-align: center;
-    border-radius: 0 0 15px 15px;
-    overflow: visible;
-    word-wrap: break-word;
-  }
-
-  .arrow.right {
-    right: 1.5px;
-  bottom: 2.8px;
-  font-size: 1.5rem;
-  padding: 3px 5px;
-  border-radius: 50%;
-  transform: translateY(1px);
-}
- .arrow.right.left-align {
-    transform: translateY(-1px);
-  }
-.profile-card:nth-child(2) {
-    margin-top: -2px;
 
 }
    div[style*="height: 20vh"] {
