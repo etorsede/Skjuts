@@ -8,12 +8,34 @@
      object-fit: contain;
   }
 
-  canvas {
-  position: fixed;
+canvas {
+   position: fixed;
   top: 0;
   left: 0;
   z-index: 0;
   pointer-events: none;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+}
+
+.download-buttons {
+  position: relative;
+  z-index: 5;
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 .custom-background {
@@ -124,6 +146,7 @@
     position: static !important;
     transform: none !important;
     margin-bottom: 0.1rem;
+    top: 0.5rem;
   }
 
   .nav-buttons {
@@ -261,16 +284,78 @@ footer {
 
 
 .section-title {
-  margin-top: 5px;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  letter-spacing: 2px;
-  color: #d4ccdb;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  /* subtle gradient */
+  background: linear-gradient(120deg, #ffffff, #bfb6c9, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  position: relative;
 }
 
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 2px;
+  margin: 12px auto 0;
+
+  background: linear-gradient(90deg, transparent, #F02A2A, transparent);
+  opacity: 0.8;
+}
+
+
 @media (max-width: 768px) {
-  .section-title {
-    margin-top: 120px; /* mobile spacing (keeps logo clear) */
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .logo-container {
+    top: 0rem;
+  }
+
+  .page-wrapper {
+    display: block !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .page {
+    width: 100% !important;
+    min-height: auto !important;
+    display: block !important;
+    padding-top: 120px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 60px;
+  }
+
+  .section-header {
+    margin-bottom: 1rem;
+  }
+
+  .arrow {
+    display: none !important;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .store-btn {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .team-profile-container {
+    margin-bottom: 20px;
   }
 }
 
@@ -285,6 +370,8 @@ footer {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  max-width: 1200px;
+  width: 100%;
 }
 
 /* CARD */
@@ -400,6 +487,7 @@ footer {
   position: relative;
   padding: 0;
   scroll-margin-top: 150px;
+  padding: 1.5rem 1rem 1rem 1rem;
 }
 
 
@@ -485,4 +573,153 @@ footer a:hover {
 
 .custom-button:active {
   transform: scale(0.98);
+}
+
+.page-wrapper {
+  display: flex;
+  width: 300%; /* 3 pages */
+  transition: transform 0.6s ease;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+}
+
+/* IMPORTANT */
+.page > * {
+  width: 100%;
+}
+
+/* ARROWS */
+.arrow {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.3),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+/* LEFT */
+.arrow.left {
+  left: 0;
+}
+
+/* RIGHT */
+.arrow.right {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0,0,0,0.3),
+    transparent
+  );
+}
+
+/* HOVER */
+.arrow:hover {
+  background: rgba(0,0,0,0.5);
+  font-size: 3.5rem;
+}
+
+.section-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1rem;
+  text-align: left;
+
+}
+
+.section-header h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.store-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 14px 22px;
+  border-radius: 16px;
+
+  text-decoration: none;
+  color: white;
+
+  min-width: 200px;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(12px);
+
+  transition: all 0.25s ease;
+
+  position: relative;
+  z-index: 10;
+}
+
+.download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.store-btn .small {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.store-btn .big {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.store-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(255,255,255,0.15);
+}
+
+.appstore {
+  border-color: rgba(255,255,255,0.35);
+}
+
+.playstore {
+  border-color: rgba(0,255,150,0.5);
+}
+
+.page-wrapper,
+.page,
+.download-buttons,
+.store-btn {
+  position: relative;
+  z-index: 5;
 }

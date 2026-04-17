@@ -15,96 +15,130 @@
      <a href="https://www.skjuts.com" class="logo-container">
     <img src="img\nice_no_background.png"  alt="SKJUTS Logo" class="logo-img">
    </a>
-<section id="about-section">
-     <div style="height: 25vh;"></div>
-<h2 class="section-title">CREW</h2>
-  <div class="team-profile-fade-group">
-  <div class="team-profile-container">
 
-    <!-- Card 1 -->
-<div class="profile-card" onclick="flipCard(this)">
-  <div class="card-wrapper">
-  <div class="card-inner">
+<div class="page-wrapper">
 
-    <!-- FRONT -->
-    <div class="card-front">
-      <img src="img/eric.jpg" alt="Eric" class="profile-image">
-
-      <div class="profile-info">
-        <h3>Eric C. Torsede</h3>
-        <p>Doing all the dirty work, also some tech</p>
-      </div>
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <div class="section-header">
+      <h2>MISSION</h2>
     </div>
-
-    <!-- BACK -->
-    <div class="card-back">
-      <div class="back-info">
-        <p>FILL IN</p>
-        <p>FILL IN</p>
-        <p>Email:</p>
-      </div>
-    </div>
-
   </div>
-</div>
-</div>
 
-    <!-- Card 2 -->
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+
+    <section id="about-section">
+
+      <div class="section-header">
+        <h2>CREW</h2>
+      </div>
+
+      <div class="team-profile-container">
+
+        <!-- Card 1 -->
         <div class="profile-card" onclick="flipCard(this)">
           <div class="card-wrapper">
-  <div class="card-inner">
+            <div class="card-inner">
 
-    <!-- FRONT -->
-    <div class="card-front">
-      <img src="img/isabelle.jpg" alt="Eric" class="profile-image">
+              <div class="card-front">
+                <img src="img/eric.jpg" class="profile-image">
+                <div class="profile-info">
+                  <h3>Eric C. Torsede</h3>
+                  <p>Doing all the dirty work, also some tech</p>
+                </div>
+              </div>
 
-      <div class="profile-info">
-        <h3>Isabelle Avenius</h3>
-        <p>Selling sand in the desert</p>
+              <div class="card-back">
+                <div class="back-info">
+                  <p>FILL IN</p>
+                  <p>FILL IN</p>
+                  <p>Email:</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="profile-card" onclick="flipCard(this)">
+          <div class="card-wrapper">
+            <div class="card-inner">
+
+              <div class="card-front">
+                <img src="img/isabelle.jpg" class="profile-image">
+                <div class="profile-info">
+                  <h3>Isabelle Avenius</h3>
+                  <p>Selling sand in the desert</p>
+                </div>
+              </div>
+
+              <div class="card-back">
+                <div class="back-info">
+                  <p>FILL IN</p>
+                  <p>FILL IN</p>
+                  <p>Email:</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="profile-card" onclick="flipCard(this)">
+          <div class="card-wrapper">
+            <div class="card-inner">
+
+              <div class="card-front">
+                <img src="img/johanna.jpg" class="profile-image">
+                <div class="profile-info">
+                  <h3>Johanna C. Nylander</h3>
+                  <p>Creative creature handling the business and other mental things</p>
+                </div>
+              </div>
+
+              <div class="card-back">
+                <div class="back-info">
+                  <p>FILL IN</p>
+                  <p>FILL IN</p>
+                  <p>Email:</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
+
+    </section>
+  </div>
+
+  <div class="page" id="page3">
+
+    <div class="section-header">
+      <h2>DOWNLOAD</h2>
     </div>
 
-    <!-- BACK -->
-    <div class="card-back">
-      <div class="back-info">
-        <p>FILL IN</p>
-        <p>FILL IN</p>
-        <p>Email:</p>
-      </div>
+    <div class="download-buttons">
+      <a href="#" class="store-btn appstore">
+        <span class="small">Download on the</span>
+        <span class="big">App Store</span>
+      </a>
+
+      <a href="#" class="store-btn playstore">
+        <span class="small">Get it on</span>
+        <span class="big">Google Play</span>
+      </a>
     </div>
 
   </div>
-</div>
-</div>
-          <!-- Card 3 -->
- <div class="profile-card" onclick="flipCard(this)">
-  <div class="card-wrapper">
-  <div class="card-inner">
 
-    <!-- FRONT -->
-    <div class="card-front">
-      <img src="img/johanna.jpg" alt="Eric" class="profile-image">
-
-      <div class="profile-info">
-        <h3>Johanna C. Nylander</h3>
-        <p>Creative creature handling the business and other mental things</p>
-      </div>
-    </div>
-
-    <!-- BACK -->
-    <div class="card-back">
-      <div class="back-info">
-        <p>FILL IN</p>
-        <p>FILL IN</p>
-        <p>Email:</p>
-      </div>
-    </div>
-
-  </div>
 </div>
-</div>
-</section>
 <script type="importmap">
+
 {
     "imports": {
         "three": "https://threejs.org/build/three.module.js",
@@ -148,6 +182,8 @@ loader.load("./models/skjuts_car.glb", (gltf) => {
   car.rotation.x = Math.PI*1.5 ;
 
   baseRotation = car.rotation.clone();
+
+   updateCarVisibility();
 
   scene.add(car);
 });
@@ -203,6 +239,17 @@ function animate() {
 }
 
 animate();
+
+function updateCarVisibility() {
+  if (!car) return;
+
+  if (currentPage === 0) {
+    car.visible = true;   // show on first page
+  } else {
+    car.visible = false;  // hide on others
+  }
+}
+
 </script>
 
 <script>
@@ -210,6 +257,34 @@ function flipCard(card) {
   card.classList.toggle("flipped");
 }
 </script>
+
+<script>
+let currentPage = 0;
+const totalPages = 3;
+
+function updatePage() {
+  document.querySelector('.page-wrapper').style.transform =
+    `translateX(-${currentPage * 100}vw)`;
+    updateCarVisibility();
+}
+
+function nextPage() {
+  if (currentPage < totalPages - 1) {
+    currentPage++;
+    updatePage();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 0) {
+    currentPage--;
+    updatePage();
+  }
+}
+</script>
+
+<div class="arrow left" onclick="prevPage()">&larr;</div>
+<div class="arrow right" onclick="nextPage()">&rarr;</div>
 
 </body>
 
